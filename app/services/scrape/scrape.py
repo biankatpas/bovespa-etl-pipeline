@@ -1,4 +1,4 @@
-from app.services.extract import api, parser, storage
+from app.services.scrape import api, parser, storage
 
 from app import config
 

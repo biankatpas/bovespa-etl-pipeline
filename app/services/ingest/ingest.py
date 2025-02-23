@@ -1,4 +1,4 @@
-from app.services.load.helper import upload_directory_to_s3
+from app.services.ingest.helper import upload_directory_to_s3
 from app.config import BUCKET_NAME, OUTPUT_DIR
 
 

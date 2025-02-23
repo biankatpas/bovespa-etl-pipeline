@@ -37,10 +37,16 @@ Below is a high-level overview of the architecture:
 bovespa-etl-pipeline/
 ├── docs/                   # Documentation and architecture diagrams
 ├── app/
+│   ├── infra/
+│   │   ├── s3/             # Terraform bucket creation
+│   │   ├── eventbridge/    # Terraform event bridge creation
+│   │   ├── stepfunctions/  # Terraform step functions creation
+│   │   ├── glue/           # Terraform glue creation
+│   │   ├── athena/         # Terraform athena creation
 │   ├── services/
-│   │   ├── extract/        # Data extraction scripts
-│   │   ├── load/           # Load data on S3
-│   │   └── lambda/         # AWS Lambda function code
+│   │   ├── scrape/         # Data extraction scripts
+│   │   ├── ingest/         # Load data on S3
+│   │   └── glue/           # AWS glue jobs scripts
 │   └── deployment/         # Deployment scripts and configurations
 └── README.md               # This file
 ```
@@ -75,13 +81,13 @@ Open your terminal in the repository's root, then run:
 
 Run the extraction process to retrieve data from the B3 website. Open your terminal in the repository's root, then run:
 
-`python3 -m app.services.extract.extract`
+`python3 -m app.services.scrape.scrape`
 
 **2. Ingestion and Trigger** 
 
 Upload data to the S3 bucket to trigger the Lambda function. Open your terminal in the repository's root, then run:
 
-`python3 -m app.services.load.load`
+`python3 -m app.services.ingest.ingest`
 
 **3. ETL Execution**
 
