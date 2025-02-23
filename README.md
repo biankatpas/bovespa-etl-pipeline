@@ -50,6 +50,23 @@ bovespa-etl-pipeline/
 - Data Transformation: Implementation of transformations like numerical aggregation, column renaming, and date calculations.
 - Cataloging & Querying: Automatic cataloging with AWS Glue and querying capabilities via AWS Athena.
 
+# Setup
+
+1. Create a Virtual Environment
+
+Open your terminal in the repository's root, then run:
+
+`python -m venv env`
+
+2. Activate the Virtual Environment
+
+`source env/bin/activate`
+
+3. Install the Requirements
+
+`pip install -r requirements.txt`
+
+
 # Usage
 - Extract Data: Run the extraction process to retrieve data from the B3 website.
 - Ingestion and Trigger: Upload data to the S3 bucket to trigger the Lambda function.
