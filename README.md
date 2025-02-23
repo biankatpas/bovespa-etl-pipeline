@@ -13,11 +13,15 @@ The main components of the pipeline include:
 - Data Cataloging: The Glue job automatically catalogs data in the Glue Data Catalog.
 - Data Analysis: Data is made available and queryable in AWS Athena.
 
+# Data Source
+
+The data used in this project is extracted from the official B3 website. You can access the data at [B3 Official Website](https://sistemaswebb3-listados.b3.com.br/indexPage/day/IBOV?language=pt-br).
+
 # Project Architecture
 
 Below is a high-level overview of the architecture:
 
-***To-Do: add the architecture diagram***
+![Architecture Diagram](docs/architecture-diagram.jpg)
 
 1. Data Source: B3 trading data is extracted from the official website.
 2. Data Ingestion: Raw data is stored in an S3 bucket in Parquet format with daily partitions.
@@ -56,4 +60,5 @@ bovespa-etl-pipeline/
 - An active AWS account.
 - AWS CLI and SDKs installed and configured.
 - Basic knowledge of AWS Glue, Athena, Lambda, and S3.
+- [LocalStack](https://github.com/localstack/localstack) for local simulation of AWS services (S3, Lambda, etc.), if desired.
 
