@@ -3,6 +3,10 @@ env/
 venv/
 ENV/
 
+# Parquet files
+*.parquet
+bovespa_data/
+
 # Environment variable file
 .env
 
