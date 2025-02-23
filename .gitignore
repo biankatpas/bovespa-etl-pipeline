@@ -1,0 +1,25 @@
+# Virtual environment directories
+env/
+venv/
+ENV/
+
+# Environment variable file
+.env
+
+# Python compiled files and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# macOS DS_Store files
+.DS_Store
+
+# IDE files (optional)
+.vscode/
+.idea/

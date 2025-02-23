@@ -58,7 +58,7 @@ bovespa-etl-pipeline/
 
 Open your terminal in the repository's root, then run:
 
-`python -m venv env`
+`python3 -m venv env`
 
 **2. Activate the Virtual Environment**
 
