@@ -1,6 +1,8 @@
 # Bovespa ETL Pipeline
 
-This project demonstrates an ETL (Extract, Transform, Load) pipeline that extracts B3 trading data from the official website, ingests raw data into AWS S3 in Parquet format (with daily partitions), and triggers further data processing through AWS Lambda and AWS Glue. The processed data is then cataloged and made available in AWS Athena for querying.
+This project demonstrates an ETL (Extract, Transform, Load) pipeline that extracts B3 trading data from the official website, ingests raw data into AWS S3 in Parquet format (with daily partitions), and triggers further data processing through AWS Lambda and AWS Glue. 
+
+The processed data is then cataloged and made available in AWS Athena for querying.
 
 # Project Overview
 
@@ -52,17 +54,17 @@ bovespa-etl-pipeline/
 
 # Setup
 
-1. Create a Virtual Environment
+**1. Create a Virtual Environment**
 
 Open your terminal in the repository's root, then run:
 
 `python -m venv env`
 
-2. Activate the Virtual Environment
+**2. Activate the Virtual Environment**
 
 `source env/bin/activate`
 
-3. Install the Requirements
+**3. Install the Requirements**
 
 `pip install -r requirements.txt`
 
