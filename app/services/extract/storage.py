@@ -1,8 +1,10 @@
 import os
 import pyarrow as pa
 import pyarrow.parquet as pq
+
 from datetime import datetime
-from extract import config
+
+from app import config
 
 OUTPUT_DIR = config.OUTPUT_DIR
 

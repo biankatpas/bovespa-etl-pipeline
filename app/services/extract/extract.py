@@ -1,4 +1,6 @@
-import api, parser, storage, config
+from app.services.extract import api, parser, storage
+
+from app import config
 
 PAYLOAD_TEMPLATE = config.PAYLOAD_TEMPLATE
 

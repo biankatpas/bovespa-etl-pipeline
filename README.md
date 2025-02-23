@@ -36,11 +36,11 @@ Below is a high-level overview of the architecture:
 ```
 bovespa-etl-pipeline/
 ├── docs/                   # Documentation and architecture diagrams
-├── src/
+├── app/
 │   ├── services/
 │   │   ├── extract/        # Data extraction scripts
-│   │   ├── lambda/         # AWS Lambda function code
-│   │   └── glue/           # AWS Glue job scripts and configurations
+│   │   ├── load/           # Load data on S3
+│   │   └── lambda/         # AWS Lambda function code
 │   └── deployment/         # Deployment scripts and configurations
 └── README.md               # This file
 ```
@@ -70,14 +70,31 @@ Open your terminal in the repository's root, then run:
 
 
 # Usage
-- Extract Data: Run the extraction process to retrieve data from the B3 website.
-- Ingestion and Trigger: Upload data to the S3 bucket to trigger the Lambda function.
-- ETL Execution: Monitor the Glue job’s progress via AWS console.
-- Querying Data: Use Athena to run SQL queries against the refined data.
+
+**1. Extract Data**
+
+Run the extraction process to retrieve data from the B3 website. Open your terminal in the repository's root, then run:
+
+`python3 -m app.services.extract.extract`
+
+**2. Ingestion and Trigger** 
+
+Upload data to the S3 bucket to trigger the Lambda function.
+
+Open your terminal in the repository's root, then run:
+
+`python3 -m app.services.load.load`
+
+**3. ETL Execution**
+
+Monitor the Glue job’s progress via AWS console.
+
+**4. Querying Data**
+
+Use Athena to run SQL queries against the refined data.
 
 # Prerequisites
 - An active AWS account.
 - AWS CLI and SDKs installed and configured.
 - Basic knowledge of AWS Glue, Athena, Lambda, and S3.
 - [LocalStack](https://github.com/localstack/localstack) for local simulation of AWS services (S3, Lambda, etc.), if desired.
-

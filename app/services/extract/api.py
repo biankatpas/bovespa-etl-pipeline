@@ -2,7 +2,9 @@ import requests
 import json
 import base64
 
-from config import BASE_URL
+from app import config
+
+BASE_URL = config.BASE_URL
 
 
 def encode_payload(payload):
