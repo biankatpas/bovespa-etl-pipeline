@@ -79,9 +79,7 @@ Run the extraction process to retrieve data from the B3 website. Open your termi
 
 **2. Ingestion and Trigger** 
 
-Upload data to the S3 bucket to trigger the Lambda function.
-
-Open your terminal in the repository's root, then run:
+Upload data to the S3 bucket to trigger the Lambda function. Open your terminal in the repository's root, then run:
 
 `python3 -m app.services.load.load`
 
