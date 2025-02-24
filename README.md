@@ -23,11 +23,11 @@ Below is a high-level overview of the architecture:
 
 ![Architecture Diagram](docs/architecture-diagram.jpg)
 
-**Data Source:** B3 trading data is extracted from the official website and stored locally. 
-**Data Ingestion:** Raw data is stored in an S3 bucket in Parquet format with daily partitions.
-**Event Bridge Trigger:** S3 events trigger EventBridge to call the Step Functions state machine, which then starts the Glue ETL job.
-**ETL Processing:** The Glue job processes and transforms the data, storing the refined output in a separate S3 directory.
-**Data Catalog & Querying:** Processed data is cataloged in the Glue Data Catalog and is accessible via Athena.
+- **Data Source:** B3 trading data is extracted from the official website and stored locally. 
+- **Data Ingestion:** Raw data is stored in an S3 bucket in Parquet format with daily partitions.
+- **Event Bridge Trigger:** S3 events trigger EventBridge to call the Step Functions state machine, which then starts the Glue ETL job.
+- **ETL Processing:** The Glue job processes and transforms the data, storing the refined output in a separate S3 directory.
+- **Data Catalog & Querying:** Processed data is cataloged in the Glue Data Catalog and is accessible via Athena.
 
 # Project Structure
 
