@@ -7,6 +7,7 @@ load_dotenv()
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 OUTPUT_DIR = os.path.join(PROJECT_ROOT, "bovespa_data")
+GLUE_SCRIPTS_DIR = "app/services/glue"
 
 BASE_URL = "https://sistemaswebb3-listados.b3.com.br/indexProxy/indexCall/GetPortfolioDay/"
 

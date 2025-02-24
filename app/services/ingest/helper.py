@@ -30,13 +30,14 @@ def upload_file_to_s3(file_path, bucket_name, s3_key):
     return True
 
 
-def upload_directory_to_s3(local_dir, bucket_name):
+def upload_directory_to_s3(local_dir, bucket_name, s3_folder="raw"):
     """
     Upload all files in a local directory to an S3 bucket.
 
     Args:
         local_dir (str): Local directory path.
         bucket_name (str): S3 bucket name.
+        s3_folder (str, optional): S3 folder to upload files into (default is "raw").
     
     Returns:
         None
@@ -45,8 +46,28 @@ def upload_directory_to_s3(local_dir, bucket_name):
         for file in files:
             local_file_path = os.path.join(root, file)
             relative_path = os.path.relpath(local_file_path, local_dir)
-            s3_key = relative_path.replace("\\", "/")
+            relative_path = relative_path.replace("\\", "/")
+            s3_key = f"{s3_folder}/{relative_path}"
             
             upload_file_to_s3(local_file_path, bucket_name, s3_key)
 
-# TODO: upload glue scripts to S3
+
+def upload_glue_scripts_to_s3(local_glue_dir, bucket_name, s3_folder="scripts"):
+    """
+    Uploads all files in the local Glue scripts directory to the specified folder in the S3 bucket.
+
+    Args:
+        local_glue_dir (str): Path to the local directory containing Glue scripts.
+        bucket_name (str): Name of the S3 bucket.
+        s3_folder (str, optional): S3 folder to upload files into (default is "scripts").
+
+    Returns:
+        None
+    """
+    for root, _, files in os.walk(local_glue_dir):
+        for file in files:
+            local_file_path = os.path.join(root, file)
+            filename = os.path.basename(local_file_path)
+            s3_key = f"{s3_folder}/{filename}"
+                        
+            upload_file_to_s3(local_file_path, bucket_name, s3_key)

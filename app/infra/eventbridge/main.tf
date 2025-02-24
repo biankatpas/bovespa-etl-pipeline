@@ -16,7 +16,7 @@ variable "state_machine_arn" {
 # EventBridge rule to trigger when an object is created in your S3 bucket
 resource "aws_cloudwatch_event_rule" "s3_etl" {
   name        = "etl-s3-rule"
-  description = "EventBridge rule to trigger the state machine when a file is uploaded to the bucket"
+  description = "EventBridge rule to trigger the state machine when a file is uploaded to the raw folder in the bucket"
   event_pattern = jsonencode({
     "source": [
       "aws.s3"
@@ -28,6 +28,11 @@ resource "aws_cloudwatch_event_rule" "s3_etl" {
       "bucket": {
         "name": [
           "bovespa-etl-360494"
+        ]
+      },
+      "object": {
+        "key": [
+          { "prefix": "raw/" }
         ]
       }
     }
