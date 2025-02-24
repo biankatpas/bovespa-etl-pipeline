@@ -1,8 +1,6 @@
 # Bovespa ETL Pipeline
 
-This project demonstrates an ETL (Extract, Transform, Load) pipeline that extracts B3 trading data from the official website, ingests raw data into AWS S3 in Parquet format (with daily partitions), and triggers further data processing through AWS Event Bridge, AWS Step Functions, and AWS Glue. 
-
-The processed data is then cataloged and made available in AWS Athena for querying.
+This project demonstrates an ETL (Extract, Transform, Load) pipeline that extracts B3 trading data from the official website, ingests raw data into AWS S3 in Parquet format (with daily partitions), and triggers further data processing through AWS Event Bridge, AWS Step Functions, and AWS Glue. The processed data is then cataloged and made available in AWS Athena for querying.
 
 # Project Overview
 
