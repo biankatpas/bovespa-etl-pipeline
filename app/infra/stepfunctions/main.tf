@@ -5,7 +5,7 @@ data "aws_iam_role" "etl_role" {
 
 # Definition of the Step Functions state machine
 resource "aws_sfn_state_machine" "bovespa_etl_state_machine" {
-  name     = "bovespa-etl_state_machine"
+  name     = "bovespa-etl-state-machine"
   role_arn = data.aws_iam_role.etl_role.arn
 
   definition = jsonencode({

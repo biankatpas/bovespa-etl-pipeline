@@ -77,28 +77,46 @@ Open your terminal in the repository's root, then run:
 
 # Usage
 
-**1. Extract Data**
+**1. Create AWS Resources**
+
+Open your terminal in the repository's root, then run:
+
+`export $(grep -v '^#' .env | xargs)`
+
+`terraform init`
+
+`terraform plan`
+
+`terraform apply`
+
+**2. Extract Data**
 
 Run the extraction process to retrieve data from the B3 website. Open your terminal in the repository's root, then run:
 
 `python3 -m app.services.scrape.scrape`
 
-**2. Ingestion and Trigger** 
+**3. Ingestion and Trigger** 
 
 Upload data to the S3 bucket to trigger the Lambda function. Open your terminal in the repository's root, then run:
 
 `python3 -m app.services.ingest.ingest`
 
-**3. ETL Execution**
+**4. ETL Execution**
 
 Monitor the Glue job’s progress via AWS console.
 
-**4. Querying Data**
+**5. Querying Data**
 
 Use Athena to run SQL queries against the refined data.
+
+**6. Delete AWS Resources**
+
+`terraform destroy`
 
 # Prerequisites
 - An active AWS account.
 - AWS CLI and SDKs installed and configured.
-- Basic knowledge of AWS Glue, Athena, Lambda, and S3.
+- Terraform installed and configured.
+- Make sure you configure your `.env` file as shown in `example.env`
+- Basic knowledge of AWS Glue, Athena, Event Bridge, Step Functions, and S3.
 - [LocalStack](https://github.com/localstack/localstack) for local simulation of AWS services (S3, Lambda, etc.), if desired.
