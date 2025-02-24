@@ -47,7 +47,11 @@ bovespa-etl-pipeline/
 │   │   ├── scrape/         # Data extraction scripts
 │   │   ├── ingest/         # Load data on S3
 │   │   └── glue/           # AWS glue jobs scripts
-│   └── deployment/         # Deployment scripts and configurations
+│   └── config.py/          
+├── .gitignore
+├── example.env
+├── requirements.txt        
+├── infra.tf                # Terraform main file
 └── README.md               # This file
 ```
 
