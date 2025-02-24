@@ -48,3 +48,5 @@ def upload_directory_to_s3(local_dir, bucket_name):
             s3_key = relative_path.replace("\\", "/")
             
             upload_file_to_s3(local_file_path, bucket_name, s3_key)
+
+# TODO: upload glue scripts to S3
