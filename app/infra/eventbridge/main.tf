@@ -44,6 +44,6 @@ resource "aws_cloudwatch_event_target" "target_step_functions" {
   rule     = aws_cloudwatch_event_rule.s3_etl.name
   arn      = var.state_machine_arn
   role_arn = data.aws_iam_role.etl_role.arn
-  input = jsonencode({})
+  input_path = "$"
 }
 

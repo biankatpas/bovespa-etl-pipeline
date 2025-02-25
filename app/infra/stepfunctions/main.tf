@@ -14,9 +14,13 @@ resource "aws_sfn_state_machine" "bovespa_etl_state_machine" {
     "States" : {
       "ExtractJob" : {
         "Type" : "Task",
+        "InputPath": "$",
         "Resource" : "arn:aws:states:::glue:startJobRun.sync",
         "Parameters" : {
-          "JobName" : "extract"
+          "JobName" : "extract",
+          "Arguments": {
+            "--INPUT_PATH.$": "$.detail.object.key"
+          }
         },
         "Catch" : [{
           "ErrorEquals" : ["States.ALL"],
