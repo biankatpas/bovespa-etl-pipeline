@@ -44,7 +44,6 @@ def read_and_process_data(spark, raw_path, input_path, partition_date):
     
     df = df.withColumn("processing_date", current_timestamp())
     df = df.withColumn("source_file", lit(input_path))
-    df = df.withColumn("partition_date", lit(partition_date))
     
     return df
 

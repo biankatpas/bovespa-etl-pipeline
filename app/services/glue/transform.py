@@ -6,8 +6,9 @@ from pyspark.context import SparkContext
 from awsglue.context import GlueContext
 from awsglue.job import Job
 from awsglue.dynamicframe import DynamicFrame
-from pyspark.sql.functions import col, to_date, sum, count, avg, round, when, length, lit, year, concat, datediff
+from pyspark.sql.functions import col, to_date, sum, count, avg, round, when, length, lit, year, concat, datediff, isnan, regexp_replace
 from pyspark.sql.window import Window
+from pyspark.sql.types import DoubleType
 
 
 def initialize_glue_context():
@@ -27,24 +28,36 @@ def read_interim_data(spark, interim_path):
     return df
 
 def transform_data(df):
+    total_rows = df.count()
+    
+    null_counts = {}
+    for column in df.columns:
+        null_count = df.filter(col(column).isNull()).count()
+        null_percentage = (null_count / total_rows) * 100
+        null_counts[column] = (null_count, null_percentage)
+        print(f"Column '{column}': {null_count} nulls ({null_percentage:.2f}%)")
+    
+    columns_to_drop = [column for column, (null_count, percentage) in null_counts.items() 
+                      if percentage > 95]  # Drop if more than 95% null
+        
+    if columns_to_drop:
+        df = df.drop(*columns_to_drop)
+    
     df = df.withColumnRenamed("asset", "stock_name") \
            .withColumnRenamed("cod", "stock_code")
     
-    print("Sample dates from the dataset:")
-    df.select("date").distinct().show(5, truncate=False)
+    df = df.withColumn("part_numeric", 
+                      when(col("part").isNotNull(), 
+                          regexp_replace(col("part"), ",", ".").cast(DoubleType()))
+                      .otherwise(0.0))
     
     try:
         df = df.withColumn("date_formatted", to_date(col("date"), "yyyy-MM-dd"))
         
-        print("Converted dates sample:")
-        df.select("date", "date_formatted").distinct().show(5, truncate=False)
-        
-        df = df.withColumn("start_of_year", 
-                          concat(year(col("date_formatted")), lit("-01-01")))
-        
+        start_of_year = concat(year(col("date_formatted")), lit("-01-01"))
         df = df.withColumn("days_since_beginning_of_year", 
                          datediff(col("date_formatted"), 
-                                to_date(col("start_of_year"), "yyyy-MM-dd")))
+                                to_date(start_of_year, "yyyy-MM-dd")))
     except Exception as e:
         print(f"Error processing dates: {e}")
         df = df.withColumn("days_since_beginning_of_year", lit(30))
@@ -52,12 +65,14 @@ def transform_data(df):
     window_spec = Window.partitionBy("stock_code", "dt")
     
     df = df.withColumn("record_count", count("*").over(window_spec)) \
-           .withColumn("average_part_acum", avg("partAcum").over(window_spec)) \
+           .withColumn("average_part", avg("part_numeric").over(window_spec)) \
            .withColumn("type_count", sum(when(col("type").isNotNull(), 1).otherwise(0)).over(window_spec)) \
            .withColumn("avg_name_length", avg(length(col("stock_name"))).over(window_spec))
     
     df = df.withColumn("record_density", 
-                      round(col("record_count") / col("average_part_acum"), 4))
+                      when(col("average_part") > 0,
+                          round(col("record_count") / col("average_part"), 4))
+                      .otherwise(0.0))
         
     return df
 
