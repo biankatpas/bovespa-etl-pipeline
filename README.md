@@ -113,6 +113,12 @@ Use Athena to run SQL queries against the refined data. Open your terminal in th
 
 `python3 -m app.services.athena.athena`
 
+The script will generate visualization charts based on your Athena query results:
+
+![Athena](docs/athena-example.png)
+
+***This chart shows the average participation percentage of top stocks in the B3, highlighting which companies have the greatest weight in the Brazilian stock market composition.***
+
 **6. Delete AWS Resources**
 
 `terraform destroy`
