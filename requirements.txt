@@ -3,3 +3,8 @@ pandas
 pyarrow
 python-dotenv
 boto3
+pyathena
+matplotlib
+seaborn
+jupyter
+nbformat

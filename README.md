@@ -39,12 +39,12 @@ bovespa-etl-pipeline/
 │   │   ├── s3/             # Terraform bucket creation
 │   │   ├── eventbridge/    # Terraform event bridge creation
 │   │   ├── stepfunctions/  # Terraform step functions creation
-│   │   ├── glue/           # Terraform glue creation
-│   │   ├── athena/         # Terraform athena creation
+│   │   └── glue/           # Terraform glue creation
 │   ├── services/
 │   │   ├── scrape/         # Data extraction scripts
 │   │   ├── ingest/         # Load data on S3
-│   │   └── glue/           # AWS glue jobs scripts
+│   │   ├── glue/           # AWS glue jobs scripts
+│   │   └── athena/         # AWS Athena usage example
 │   └── config.py/          
 ├── .gitignore
 ├── example.env
@@ -109,7 +109,9 @@ Monitor the Glue job’s progress via AWS console.
 
 **5. Querying Data**
 
-Use Athena to run SQL queries against the refined data.
+Use Athena to run SQL queries against the refined data. Open your terminal in the repository's root, then run:
+
+`python3 -m app.services.athena.athena`
 
 **6. Delete AWS Resources**
 
