@@ -62,7 +62,7 @@ bovespa-etl-pipeline/
 
 ## Demonstration Video
 
-Check out the video demonstration of the Viticulture Data API in action:
+Check out the video demonstration of the Bovespa ETL Pipeline in action:
 
 [![Watch the Video](https://img.youtube.com/vi/WGozjAQLI94/0.jpg)](https://youtu.be/WGozjAQLI94)
 
