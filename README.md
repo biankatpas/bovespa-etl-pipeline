@@ -60,6 +60,14 @@ bovespa-etl-pipeline/
 - Data Transformation: Implementation of transformations like numerical aggregation, column renaming, and date calculations.
 - Cataloging & Querying: Automatic cataloging with AWS Glue and querying capabilities via AWS Athena.
 
+## Demonstration Video
+
+Check out the video demonstration of the Viticulture Data API in action:
+
+[![Watch the Video](https://img.youtube.com/vi/WGozjAQLI94/0.jpg)](https://youtu.be/WGozjAQLI94)
+
+*Click the thumbnail or [here](https://youtu.be/WGozjAQLI94) to watch on YouTube.*
+
 # Setup
 
 **1. Create a Virtual Environment**
